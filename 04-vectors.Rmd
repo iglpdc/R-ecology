@@ -1,0 +1,150 @@
+---
+layout: topic
+title: Introduction to R
+author: Data Carpentry contributors
+minutes: 45
+---
+
+
+```{r, echo=FALSE, purl=FALSE, message = FALSE}
+source("setup.R")
+```
+
+------------
+
+> ## Learning Objectives
+>
+> * Understand the concepts of vector and data types
+
+------------
+
+## Vectors and data types
+
+```{r, echo=FALSE, purl=TRUE}
+### Vectors and data types
+```
+
+A vector is the most common and basic data structure in R, and is pretty much
+the workhorse of R. It's a group of values, mainly either numbers or
+characters. You can assign this list of values to a variable, just like you
+would for one item. For example we can create a vector of animal weights:
+
+```{r, purl=FALSE}
+weights <- c(50, 60, 65, 82)
+weights
+```
+
+A vector can also contain characters:
+
+```{r, purl=FALSE}
+animals <- c("mouse", "rat", "dog")
+animals
+```
+
+There are many functions that allow you to inspect the content of a
+vector. `length()` tells you how many elements are in a particular vector:
+
+```{r, purl=FALSE}
+length(weights)
+length(animals)
+```
+
+An important feature of a vector, is that all of the elements are the same type of data.
+The function `class()` indicates the class (the type of element) of an object:
+
+```{r, purl=FALSE}
+class(weights)
+class(animals)
+```
+
+The function `str()` provides an overview of the object and the elements it
+contains. It is a really useful function when working with large and complex
+objects:
+
+```{r, purl=FALSE}
+str(weights)
+str(animals)
+```
+
+You can add elements to your vector by using the `c()` function:
+
+```{r, purl=FALSE}
+weights <- c(weights, 90) # adding at the end of the vector
+weights <- c(30, weights) # adding at the beginning of the vector
+weights
+```
+
+What happens here is that we take the original vector `weights`, and we are
+adding another item first to the end of the other ones, and then another item at
+the beginning. We can do this over and over again to grow a vector, or assemble
+a dataset. As we program, this may be useful to add results that we are
+collecting or calculating.
+
+We just saw 2 of the 6 **atomic vector** types that R uses: `"character"` and
+`"numeric"`. These are the basic building blocks that all R objects are built
+from. The other 4 are:
+
+* `"logical"` for `TRUE` and `FALSE` (the boolean data type)
+* `"integer"` for integer numbers (e.g., `2L`, the `L` indicates to R that it's an integer)
+* `"complex"` to represent complex numbers with real and imaginary parts (e.g.,
+  `1+4i`) and that's all we're going to say about them
+* `"raw"` that we won't discuss further
+
+## Subsetting Vectors
+
+If we want to extract individual values from within a vector, we can use the
+square brackets `[]` with the position number inside the brackets:
+
+```{r, purl=FALSE}
+animals[2]
+```
+
+We can also extract multiple values using the combine `c()` function within the
+square brackets:
+
+```{r, purl=FALSE}
+weights[c(1, 3)]
+```
+
+Vectors are one of the many **data structures** that R uses. Other important
+ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`) and
+factors (`factor`).
+
+Next, we will use the "surveys" dataset to explore the
+`data.frame` data structure, which is one of the most common types of R objects.
+
+### Challenge
+
+* **Question**: We’ve seen that atomic vectors can be of type character,
+  numeric, integer, and logical. But what happens if we try to mix these types in
+  a single vector?
+* _Answer_: R implicitly converts them to all be the same type
+
+* **Question**: Why do you think it happens?
+* _Answer_: Vectors can be of only one data type. R tries to convert (=coerce)
+  the content of this vector to find a "common denominator".
+
+* **Question**: Can you draw a diagram that represents the hierarchy of the data
+  types?
+* _Answer_: `logical --> numeric --> character <-- logical`
+
+```{r, echo=TRUE, eval=FALSE, purl=TRUE}
+## We’ve seen that atomic vectors can be of type character, numeric, integer, and
+## logical. But what happens if we try to mix these types in a single
+## vector?
+
+## What will happen in each of these examples? (hint: use `class()` to
+## check the data type of your object)
+num_char <- c(1, 2, 3, 'a')
+
+num_logical <- c(1, 2, 3, TRUE)
+
+char_logical <- c('a', 'b', 'c', TRUE)
+
+tricky <- c(1, 2, 3, '4')
+
+## Why do you think it happens?
+
+## Can you draw a diagram that represents the hierarchy of the data
+## types?
+```
