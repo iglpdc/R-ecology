@@ -1,5 +1,5 @@
 
-all: pages handout-script.R
+all: pages 
 
 skeleton-%.R: %.Rmd
 	Rscript -e "knitr::purl('$<', output='$@', documentation=0L)"
@@ -17,16 +17,12 @@ handout-script.R: skeleton-00-before-we-start.R skeleton-01-intro-to-R.R skeleto
 	for f in $^; do cat $$f; echo "\n"; done > $@
 	make clean-skeleton
 
-pages: index.html motivation.html 00-before-we-start.html 01-intro-to-R.html 02-starting-with-data.html 03-data-frames.html 04-dplyr.html 05-visualization-ggplot2.html 06-r-and-sql.html
-	make clean-md
+pages: index.html motivation.html 00-before-we-start.html 01-help.html 03-creating-things.html 04-vectors.html 05-starting-with-data.html 06-factors.html 07-data-frames.html 08-dplyr.html 09-visualization-ggplot2.html 10-r-and-sql.html
 
 clean-skeleton:
 	-rm skeleton-*-*.R
 
-clean-md:
-	-rm *-*.md
-
 clean-html:
 	-rm *.html
 
-clean: clean-skeleton clean-html clean-md
+clean: clean-skeleton clean-html
